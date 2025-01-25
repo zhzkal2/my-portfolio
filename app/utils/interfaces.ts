@@ -27,3 +27,9 @@ export interface GitHubStarsProps {
   owner: string
 
 }
+
+
+export interface DockProps {
+  name: string
+  active: boolean
+}

@@ -5,7 +5,7 @@ import styles from './modal.module.scss'
 import { Inter } from 'next/font/google'
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Modal({ children, closeModal, title }: ModalProps) {
+export default function Modal({ closeModal }: ModalProps) {
   const handleInnerClick = (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation()
   }
@@ -13,7 +13,6 @@ export default function Modal({ children, closeModal, title }: ModalProps) {
   return (
     <div
       className={`${styles['modal']} ${inter.className}`}
-      onClick={() => closeModal()}
     >
       <div
         className={`${styles['modal-content']} ${styles['modal-about']}`}
@@ -21,15 +20,11 @@ export default function Modal({ children, closeModal, title }: ModalProps) {
       >
         <div className={styles['modal-header']}>
           <button onClick={() => closeModal()} title="Close Modal"></button>
-          <button
-            className={styles['yellow-btn']}
-            title="Dummy Button"
-          ></button>
+          <button className={styles['yellow-btn']} title="Dummy Button"></button>
           <button className={styles['green-btn']} title="Dummy Button"></button>
         </div>
         <div className={styles['modal-body']}>
-          {title && <h2>{title}</h2>}
-          <div>{children}</div>
+          {/* <div>{children}</div> */}
         </div>
       </div>
     </div>

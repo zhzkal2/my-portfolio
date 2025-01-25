@@ -8,7 +8,12 @@ import Navbar from './components/navbar'
 import styles from './components/modal/modal.module.scss'
 
 export default function Home() {
-  const [showModal, setShowModal] = useState(false)
+  const [showModal, setShowModal] = useState(true)
+
+  const handleAppClick = (name: string, isActive: boolean) => {
+    setActiveApp(isActive ? name : null);
+  };
+
   const handleModal = () => {
     setShowModal(!showModal)
   }
@@ -26,28 +31,14 @@ export default function Home() {
 
       </section>
       {showModal && (
-        <Modal closeModal={handleModal} title="MacOS  Animation">
-          {/* <p className={styles['only-mobile']}>{onlyMobileMessage()}</p> */}
-          <p className={styles['about']}>
-            <a
-              href="https://github.com/imanolortega/mac-dock"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Check the{' '}
-              <span className={styles['yellow-link']}>repository</span>.
-            </a>
-            <a
-              href="https://imanolortega.dev/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Visit my <span className={styles['yellow-link']}>website</span>.
-            </a>
-          </p>
+        <Modal closeModal={handleModal} >
+          <p>안녕하세요</p>
         </Modal>
       )}
-      <Dock />
+      <Dock
+        active={active}
+        name={name}
+      />
     </main>
   )
 }

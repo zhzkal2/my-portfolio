@@ -3,18 +3,22 @@ import { DockItemProps } from '../../utils/interfaces'
 import Image from 'next/image'
 import styles from './dock-item.module.scss'
 import { maxButtonDistance, maxButtonSize, minButtonSize } from '../../utils/config'
-
 import { Inter } from 'next/font/google'
+import Modal from '../modal'
 const inter = Inter({ subsets: ['latin'] })
+
+
+
 
 export default function DockItem({
   active,
   mousePosition,
   name,
-  src,
+  src
 }: DockItemProps) {
   const [isHovering, setIsHovering] = useState(false)
   const [isActive, setIsActive] = useState(active || false)
+  const [showModal, setShowModal] = useState(false); // 모달 표시 여부 상태
   const dockItemRef = useRef<HTMLLIElement>(null)
   const [dockItemRect, setDockItemRect] = useState<DOMRect | undefined>(
     undefined,
@@ -78,31 +82,34 @@ export default function DockItem({
   }
 
   return (
-    <li className={styles['dock-item']} style={buttonStyle} ref={dockItemRef}>
-      <button
-        className={styles['btn']}
-        onMouseEnter={() => setIsHovering(true)}
-        onMouseLeave={() => setIsHovering(false)}
-        onClick={handleClick}
-      >
-        <div
-          className={`${styles['title']} ${isHovering ? styles['show-title'] : ''
-            } ${inter.className} ${clicked ? styles['bounce'] : ''}`}
+    <>
+      <li className={styles['dock-item']} style={buttonStyle} ref={dockItemRef} onClick={handleClick}>
+        <button
+          className={styles['btn']}
+          onMouseEnter={() => setIsHovering(true)}
+          onMouseLeave={() => setIsHovering(false)}
+          onClick={handleClick}
         >
-          {name}
-        </div>
-        <Image
-          className={`${styles['icon']} ${clicked ? styles['bounce'] : ''}`}
-          src={src}
-          alt={name}
-          width={buttonStyle.width}
-          height={buttonStyle.height}
-          style={buttonStyle}
-          placeholder="blur"
-          blurDataURL={src}
-        />
-        <span className={isActive ? styles['active'] : ''}></span>
-      </button>
-    </li>
+          <div
+            className={`${styles['title']} ${isHovering ? styles['show-title'] : ''
+              } ${inter.className} ${clicked ? styles['bounce'] : ''}`}
+          >
+            {name}
+          </div>
+          <Image
+            className={`${styles['icon']} ${clicked ? styles['bounce'] : ''}`}
+            src={src}
+            alt={name}
+            width={buttonStyle.width}
+            height={buttonStyle.height}
+            style={buttonStyle}
+            placeholder="blur"
+            blurDataURL={src}
+          />
+          <span className={isActive ? styles['active'] : ''}></span>
+        </button>
+      </li>
+
+    </>
   )
 }
