@@ -1,0 +1,35 @@
+@import './styles/variables.scss';
+
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+html,
+body {
+    max-width: 100vw;
+    overflow-x: hidden;
+}
+
+body {
+    color: $white;
+    background: url(/images/macos_monterrey.jpeg);
+    background-color: $purple;
+    background-size: 1920px 1080px;
+    background-repeat: no-repeat;
+
+    @include large {
+        background-size: 2560px 1440px;
+    }
+
+    @include extraLarge {
+        background-size: 3840px 2160px;
+    }
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
